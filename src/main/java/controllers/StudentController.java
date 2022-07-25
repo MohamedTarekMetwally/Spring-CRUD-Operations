@@ -48,16 +48,14 @@ public class StudentController {
     }
 
     @GetMapping("/updateStudent")
-    public String updateStudent(@RequestParam("UserId") int id, @ModelAttribute("student") Student student){
+    public String updateStudent(@RequestParam("UserId") int id, Model model){
 
         System.out.println("Editing data in the student with id :"+id);
+
         Student myStudent = studentService.getStudent(id);
         System.out.println(myStudent);
 
-        student.setId(myStudent.getId());
-        student.setName(myStudent.getName());
-        student.setMobile(myStudent.getMobile());
-        student.setCountry(myStudent.getCountry());
+        model.addAttribute("student",myStudent);
 
         return "add-student";
     }
